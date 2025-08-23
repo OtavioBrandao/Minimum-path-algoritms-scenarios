@@ -17,42 +17,42 @@ class GraphBase(ABC):
 
   """
 
-  def __init__(self, n: int, directed: bool = False) -> None:
-    self.n, self.m, self.directed = n, 0, directed
-
+  def __init__(self, NumVertices: int, directed: bool = False) -> None:
+    self.NumVertices, self.NumEdges, self.directed = NumVertices, 0, directed
+    self.MatrizAdj = [[0.0] * (self.NumVertices + 1) for _ in range(self.NumVertices + 1)]
   @abstractmethod
-  def addEdge(self, v : int, w : int):
-    ''' Adds edge vw to the graph
+  def addEdge(self, vertice: int, wertice: int):
+    ''' Adds edge verticewertice to the graph
 
     Parameters
     ----------
-    v : int
+    vertice: int
       first vertex.
-    w : int
+    wertice: int
       second vertex.
     '''
     pass
 
   @abstractmethod
-  def removeEdge(self, v: int, w: int):
-    ''' Removes edge vw from the graph
+  def removeEdge(self, vertice: int, wertice: int):
+    ''' Removes edge verticewertice from the graph
 
     Parameters
     ----------
-    v : int
+    vertice: int
       first vertex.
-    w : int
+    wertice: int
       second vertex.
     '''
     pass
 
   @abstractmethod
-  def getNeighbors(self, v : int, mode : str = "*", closed : bool = False) -> Generator[int, None, None]:
+  def getNeighbors(self, vertice: int, mode : str = "*", closed : bool = False) -> Generator[int, None, None]:
     '''Provides the neighbors of vertex v.
 
     Parameters
     ----------
-    v : int
+    vertice: int
       vertex.
     mode : str
       Only for directed graph. "-" if input neighborhood, "+" if output neighborhood and "*" if any.
@@ -70,42 +70,43 @@ class GraphBase(ABC):
     pass
 
   @abstractmethod
-  def isNeighbor(self, v: int, w: int) -> bool:
+  def isNeighbor(self, vertice: int, wertice: int) -> bool:
     '''Checks if v and w are adjacent
 
     Parameters
     ----------
-    v : int
+    vertice: int
       first vertex.
-    w : int
+    wertice: int
       second vertex.
 
     Returns
     ----------
     bool
-      True if v and w are adjacent, False otherwise.
+      True if vertice and wertice are adjacent, False otherwise.
     '''
     pass
 
-  def V(self) -> Generator[int, None, None]:
+  def Vertices(self) -> Generator[int, None, None]:
     """
     Retorna a lista de vértices.
     """
     for i in range(1, self.n+1):
       yield i
 
-  def E(self, iterateOverNode = False) -> Generator[tuple[int,int], None, None] | Generator[tuple[int, object], None, None]:
+  def Edges(self, iterateOverNode = False) -> Generator[tuple[int,int], None, None] | Generator[tuple[int, object], None, None]:
     """
-    Retorna a lista de arestas vw
+    Retorna a lista de arestas verticewertice
     """
 
-    for v in self.V():
-      for w in self.getNeighbors(v, mode = "+" if self.directed else "*"):
+    for vertice in self.Vertices():
+      for wertice in self.getNeighbors(vertice, mode = "+" if self.directed else "*"):
         count = True
 
         if not self.directed: # avoid double counting
-          wint = int(w) # assures int, even if it's an object/node
-          count = v < wint
+          werticeint = int(wertice) # assures int, even if it's an object/node
+          count = vertice < werticeint
 
         if count:
-          yield (v,w)
+          yield (vertice, wertice)
+          
