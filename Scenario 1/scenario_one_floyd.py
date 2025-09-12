@@ -46,3 +46,13 @@ archive = "C:\\Users\\laris\\Desktop\Faculdade\\4° periodo\\Teoria de grafos\\M
 graph = graph_read(archive)
 
 dist, route = floyd(graph)
+
+
+'''
+Resultados esperados:
+O nó que representa a estação central escolhida
+Um vetor com as distâncias da estação central até os demais vértices
+O vértice mais distante da estação central, junto com o valor de distância
+Uma matriz em que cada linha representa um vértice candidato à estação central e cadacoluna é a 
+                distância mínima entre o vértice candidato e o vértice representante da coluna.
+'''
