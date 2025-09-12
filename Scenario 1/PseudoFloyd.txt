@@ -1,0 +1,20 @@
+início
+    dados: G = (V, E)
+    matriz de valores: V(G)
+    matriz de roteamento: R = [r_ij]
+
+    para todo i, j em V faça
+        r_ij ← j
+        d_ij ← valor da aresta (i, j) em V(G)
+
+    para k = 1 até n faça          // k é o vértice-base da iteração
+        para i = 1 até n faça
+            para j = 1 até n faça
+                se d_ik + d_kj < d_ij então
+                    d_ij ← d_ik + d_kj
+                    r_ij ← r_ik
+                fim-se
+            fim-para
+        fim-para
+    fim-para
+fim
