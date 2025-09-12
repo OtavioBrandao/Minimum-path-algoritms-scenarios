@@ -1,0 +1,10 @@
+início
+    d[11] ← 0
+    d[1i] ← ∞ para todo i ∈ V - {1}      
+    anterior[i] ← 0 para todo i 
+    
+    enquanto existir (j, i) ∈ A tal que d[1i] > d[1j] + v[ji] faça //varre todos os arcos aplicando o critério
+        d[1i] ← d[1j] + v[ji]
+        anterior[i] ← j
+    fim-enquanto
+fim

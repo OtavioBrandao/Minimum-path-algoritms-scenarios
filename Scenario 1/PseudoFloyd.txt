@@ -3,9 +3,8 @@ início
     matriz de valores: V(G)
     matriz de roteamento: R = [r_ij]
 
-    para todo i, j em V faça
-        r_ij ← j
-        d_ij ← valor da aresta (i, j) em V(G)
+    r_ij ← j para todo i 
+    D0 = [d_ij] ← V(G) 
 
     para k = 1 até n faça          // k é o vértice-base da iteração
         para i = 1 até n faça

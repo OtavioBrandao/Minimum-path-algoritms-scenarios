@@ -1,0 +1,33 @@
+início
+    // Inicialização
+    d[11] ← 0                          // distância da origem até ela mesma é 0
+    d[1i] ← ∞  para todo i ∈ V - {1} faça // distância inicial infinita para os outros vértices
+    A ← V                             // conjunto de vértices abertos
+    F ← ∅                             // conjunto de vértices fechados
+    anterior[i] ← 0 para todo i
+
+    // Enquanto ainda houver vértices abertos
+    enquanto A ≠ ∅ faça
+        início
+            // Escolhe vértice r com menor distância conhecida
+            r ← v ∈ V | d[1r] = min{ d[ij]}
+
+            // Move r de aberto para fechado
+            F ← F ∪ {r}
+            A ← A - {r}
+
+            // S = sucessores de r que ainda estão em A
+            S ← A ∩ N+(r)
+
+            // Para cada sucessor i de r
+            para todo i ∈ S faça
+                início
+                    p ← min( d[1i][k-1], (d[1r] + v[ri]) ) //compara o valor anterior com a nova soma
+                    se p < d[1i] [k-1]então
+                        início
+                            d[1i][k] ← p
+                            anterior[i] ← r //atribui a nova distância
+                        fim
+                fim
+        fim
+fim
