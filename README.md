@@ -1,0 +1,1 @@
+### Describe the project divisions here and pseudo-codes and the reason for using each algorithm in different problems 

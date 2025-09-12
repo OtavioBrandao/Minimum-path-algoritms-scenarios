@@ -1,5 +1,9 @@
-from Graph import GraphBase
+from GraphBase import GraphBase
 
+# Para esse arquivo escolher o problema a ser resolvido com ele e adicionar na respectiva pasta
+
+
+# Vai ter que mudar isso
 def read_file(filename):
     V = []
     E = []
