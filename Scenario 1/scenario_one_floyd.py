@@ -1,8 +1,14 @@
 def floyd(graph):
-    #PSEUDOCÓDIGO: dados: G = (V, E)
+    '''
+    PSEUDOCÓDIGO: 
+    início
+        dados: G = (V, E)
+        matriz de valores: V(G)
+        matriz de roteamento: R = [r_ij]
+    '''
     #graph é a matriz de adjacência recebida do arquivo
     
-    vertex = len(graph) #Tamanho do grafo (número de vértices)
+    vertex = len(graph) #Tamanho do grafo G = (V,E) (número de vértices)
 
     '''
     PSEUDOCÓDIGO:
@@ -22,9 +28,9 @@ def floyd(graph):
                         d_ij ← d_ik + d_kj
                         r_ij ← r_ik
     '''
-    for k in range(vertex):                                     #k é o vértice intermediário
-        for i in range(vertex):                                 #i é o vértice de origem
-            for j in range(vertex):                             #j é o vértice de destino
+    for k in range(vertex):                                    
+        for i in range(vertex):                                
+            for j in range(vertex):                             
                 if dist[i][k] + dist[k][j] < dist[i][j]:        
                     dist[i][j] = dist[i][k] + dist[k][j]        #Atualiza a distância mínima
                     route[i][j] = route[i][k]                   #Atualiza o próximo vértice no caminho mínimo
@@ -32,9 +38,13 @@ def floyd(graph):
     return dist, route
 
 def graph_read(archive):
-    '''Lê o grafo no formato:
+    '''
+    Lê o grafo no formato:
         <num_vertices> <num_arestas>
         <origem> <destino> <cost>
+    
+    Constrói a matriz de adjacência do grafo V(G).    
+
     '''
     with open(archive, 'r') as graph_file:
         lines = graph_file.readlines()
@@ -53,12 +63,31 @@ def graph_read(archive):
     
     return graph
 
+def searching_central_station(dist):
+    min_of_max_distance = float('inf')              #Inicializa a menor distância máxima como infinito, para ser mudada depois
+    central_station = -1                            #Inicializa a estação central, como um valor inválido
+
+    for i in range(len(dist)):                      #Percorre cada vértice, como um potencial estação central
+        max_distance = max(dist[i])                 #Encontra a distância máxima do vértice i para todos os outros vértices
+        if max_distance < min_of_max_distance:
+            min_of_max_distance = max_distance      #Atualiza a menor distância máxima
+            central_station = i + 1                 #Atualiza a estação central (ajustando para base 1 e não 0)
+
+    return central_station, min_of_max_distance
+
+
 archive = "C:\\Users\\laris\\Desktop\Faculdade\\4° periodo\\Teoria de grafos\\Minimum-path-algoritms-scenarios\\Scenario 1\\graph1.txt"
 graph = graph_read(archive)
+dist, route = floyd(graph)      #dist é a matriz da última requisição do enunciado
+central_station, min_of_max_distance = searching_central_station(dist) #central_station é o nó que representa a estação central escolhida
 
-dist, route = floyd(graph)
-
-
+print("\nEstação Central:", central_station)
+print("\nDistâncias da estação central até os demais vértices:", dist[central_station - 1]) #converte da base 0 para base 1 para indexação da matriz
+print(f"\nVértice mais distante da estação central: vértice {dist[central_station - 1].index(min_of_max_distance) + 1} com distância {min_of_max_distance}") 
+print("\nMatriz de distâncias mínimas entre todos os pares de vértices:")
+for i, row in enumerate(dist):
+    print(f"Vértice {i+1}: {row}")
+    
 '''
 Resultados esperados:
 O nó que representa a estação central escolhida
