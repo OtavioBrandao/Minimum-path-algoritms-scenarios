@@ -1,3 +1,6 @@
+
+from GraphUtility import create_graph_from_file
+
 def floyd(graph):
     #PSEUDOCÓDIGO: dados: G = (V, E)
     #graph é a matriz de adjacência recebida do arquivo
@@ -32,18 +35,9 @@ def floyd(graph):
 
     return dist, route
 
-def graph_read(archive):
-    
-    '''Lê o grafo no formato:
-        <num_vertices> <num_arestas>
-        <origem> <destino> <cost>
-    '''
-    #fazer a leitura do arquivo
-    
-    return graph
 
 archive = "C:\\Users\\laris\\Desktop\Faculdade\\4° periodo\\Teoria de grafos\\Minimum-path-algoritms-scenarios\\Scenario 1\\graph1.txt"
-graph = graph_read(archive)
+graph = create_graph_from_file(archive, directed = False) # grafo nao direcionado do cenario 1
 
 dist, route = floyd(graph)
 

@@ -1,5 +1,5 @@
 from GraphBase import GraphBase
-
+from GraphUtility import AdjGraph
 # Para esse arquivo escolher o problema a ser resolvido com ele e adicionar na respectiva pasta
 
 
@@ -37,58 +37,12 @@ def read_file(filename):
 
 def create_graph_from_file(filename: str) -> GraphBase:
     V, E, directed, NumVertice = read_file(filename)
-    Graph = GrafoAdj(NumVertice, directed, V)
+    Graph = AdjGraph(NumVertice, directed, V)
     for vertice, wertice, peso in E:
         Graph.addEdge(vertice, wertice, peso)
     return Graph
 
-class GrafoAdj(GraphBase):
-    def __init__(self, NumVertices: int, directed: bool = False, vertices: list = []):
-        super().__init__(NumVertices, directed)
-        self.lista_vertices = vertices
-        #self.MatrizAdj = [[0] * (self.n + 1) for _ in range(self.n + 1)]
-        
-    def addEdge(self, vertice, wertice, weight):
-        self.MatrizAdj[vertice][wertice] = weight       #adiciona a aresta na matriz de adjacência
-        if not self.directed:
-            self.MatrizAdj[wertice][vertice] = weight   #se o grafo não for direcionado, adiciona a aresta na direção oposta
-        self.NumEdges += 1
 
-    def removeEdge(self, vertice: int, wertice: int):
-        self.MatrizAdj[vertice][wertice] = 0       #remove a aresta da matriz de adjacência
-        if not self.directed:
-            self.MatrizAdj[wertice][vertice] = 0   #se o grafo nao for direcionado, remove a aresta na direção oposta
-        self.NumEdges -= 1 
-
-    def isNeighbor(self, vertice, wertice):
-        return self.MatrizAdj[vertice][wertice] == 1 
-
-    def getNeighbors(self, vertice, mode = "*", closed = False):
-        if closed:
-            yield vertice  #se é fechado, retorna o próprio vértice
-
-        wertice = 1
-
-        while wertice <= self.NumVertices:
-            if self.directed:
-                if mode == "*" and (self.isNeighbor(vertice, wertice) or self.isNeighbor(wertice, vertice)): #retorna todos os vizinhos
-                    yield wertice
-                elif mode == "+" and self.isNeighbor(vertice, wertice): #retorna apenas os vizinhos de saida
-                    yield wertice
-                elif mode == "-" and self.isNeighbor(wertice, vertice): #retorna apenas os vizinhos de entrada
-                    yield wertice
-            else:
-                if self.isNeighbor(vertice, wertice): #se não for direcionado, retorna todos os vizinhos
-                    yield wertice
-
-            wertice += 1
-            
-    def print_graph(self):
-        print("Matriz de Adjacência:")
-        for row in self.MatrizAdj[1:]:
-            print(row[1:])
-            
-        print("Lista de Vértices:", [vertice for vertice in self.lista_vertices])
 
 ''' PSEUDOCÓDIGO DIJKSTRA
 inicio 
@@ -112,7 +66,7 @@ fim
 '''  
             
 class Dijkstra:
-    def __init__(self, grafo: GrafoAdj, origem, destino):
+    def __init__(self, grafo: AdjGraph, origem, destino):
         self.grafo, self.origem, self.destino = grafo, origem, destino
         self.distancia = 0
         
