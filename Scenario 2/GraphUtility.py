@@ -50,7 +50,7 @@ class AdjGraph(GraphBase):
         for row in self.MatrizAdj[1:]:
             print(row[1:])
 
-        print("List of Vertices:", [vertice for vertice in self.vertices_list])
+        print("List of Vertex:", [vertice for vertice in self.vertices_list])
 
 
 # For the Scenario 3, we need to read a different file format
@@ -76,7 +76,7 @@ def read_graph_from_file(file):
             for index, line in enumerate(lines): # Index will be a flag to identify the first line
                 if index == 0:
                     n_vertices, n_edges = map(int, line.split())
-                    V = list(range(1, n_vertices + 1))
+                    V = list(range(0, n_vertices))
                     continue
 
                 start, destination, cost = map(int, line.split())
@@ -117,10 +117,10 @@ def create_graph_from_file(file, directed: bool):
 def create_grid_graph_from_file(file):
     pass
 
+
 '''
-# Testing the graph creation from file
 if __name__ == "__main__":
-    filename = "graph1.txt"  # Replace with your file path
+    filename = "GraphExamples\\graph2.txt"  # Replace with your file path
     directed = False  # Change to False if the graph is undirected
 
     graph = create_graph_from_file(filename, directed)

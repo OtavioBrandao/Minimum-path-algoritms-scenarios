@@ -96,7 +96,7 @@ class GraphBase(ABC):
 
   def Edges(self, iterateOverNode = False) -> Generator[tuple[int,int], None, None] | Generator[tuple[int, object], None, None]:
     """
-    Retorna a lista de arestas verticewertice
+    Retorna a lista de arestas vertice x wertice
     """
 
     for vertice in self.Vertices():
