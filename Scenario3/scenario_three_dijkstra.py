@@ -33,7 +33,7 @@ def print_path(path, rows, cols, grid):
     grid_copy = grid.copy()
     for vertex in path:
         row, col = idx_to_pos(vertex, cols)
-        if grid_copy[row][col] not in ['S', 'G']:
+        if grid_copy[row][col] not in ['G']:
             sum += weight(grid[row][col])                       
             grid_copy[row][col] = '|'
             
