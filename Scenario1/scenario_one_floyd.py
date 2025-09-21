@@ -75,19 +75,19 @@ def searching_central_station(dist):
 
     return central_station, min_of_max_distance
 
+def floyd_main():
+    archive = "GraphExamples\\graph1.txt" 
+    graph = graph_read(archive)
+    dist, route = floyd(graph)      #dist é a matriz da última requisição do enunciado
+    central_station, min_of_max_distance = searching_central_station(dist) #central_station é o nó que representa a estação central escolhida
 
-archive = "C:\\Users\\laris\\Desktop\Faculdade\\4° periodo\\Teoria de grafos\\Minimum-path-algoritms-scenarios\\Scenario 1\\graph1.txt"
-graph = graph_read(archive)
-dist, route = floyd(graph)      #dist é a matriz da última requisição do enunciado
-central_station, min_of_max_distance = searching_central_station(dist) #central_station é o nó que representa a estação central escolhida
-
-print("\nEstação Central:", central_station)
-print("\nDistâncias da estação central até os demais vértices:", dist[central_station - 1]) #converte da base 0 para base 1 para indexação da matriz
-print(f"\nVértice mais distante da estação central: vértice {dist[central_station - 1].index(min_of_max_distance) + 1} com distância {min_of_max_distance}") 
-print("\nMatriz de distâncias mínimas entre todos os pares de vértices:")
-for i, row in enumerate(dist):
-    print(f"Vértice {i+1}: {row}")
-    
+    print("\nEstação Central:", central_station)
+    print("\nDistâncias da estação central até os demais vértices:", dist[central_station - 1]) #converte da base 0 para base 1 para indexação da matriz
+    print(f"\nVértice mais distante da estação central: vértice {dist[central_station - 1].index(min_of_max_distance) + 1} com distância {min_of_max_distance}") 
+    print("\nMatriz de distâncias mínimas entre todos os pares de vértices:")
+    for i, row in enumerate(dist):
+        print(f"Vértice {i+1}: {row}")
+        
 '''
 Resultados esperados:
 O nó que representa a estação central escolhida
