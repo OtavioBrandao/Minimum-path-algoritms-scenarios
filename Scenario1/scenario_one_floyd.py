@@ -80,14 +80,14 @@ def floyd_main():
     graph = graph_read(archive)
     dist, route = floyd(graph)      #dist é a matriz da última requisição do enunciado
     central_station, min_of_max_distance = searching_central_station(dist) #central_station é o nó que representa a estação central escolhida
-
-    print("\nEstação Central:", central_station)
-    print("\nDistâncias da estação central até os demais vértices:", dist[central_station - 1]) #converte da base 0 para base 1 para indexação da matriz
-    print(f"\nVértice mais distante da estação central: vértice {dist[central_station - 1].index(min_of_max_distance) + 1} com distância {min_of_max_distance}") 
-    print("\nMatriz de distâncias mínimas entre todos os pares de vértices:")
+    
+    print("\nCentral Station:", central_station)
+    print("\nDistances from the central station to the other vertices:", dist[central_station - 1]) #converte da base 0 para base 1 para indexação da matriz
+    print(f"\nFarthest vertex from the central station: vertex {dist[central_station - 1].index(min_of_max_distance) + 1} with a distance of {min_of_max_distance}") 
+    print("\nMatrix of minimum distances between all pairs of vertices:")
     for i, row in enumerate(dist):
-        print(f"Vértice {i+1}: {row}")
-        
+        print(f"Vertex {i+1}: {row}")
+  
 '''
 Resultados esperados:
 O nó que representa a estação central escolhida
